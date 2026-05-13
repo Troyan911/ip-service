@@ -19,6 +19,16 @@ class UpdateIpAddressRequest extends FormRequest
                 'ip',
                 'unique:ip_addresses,ip,' . $this->ipAddress->id,
             ],
+            'country' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
+            'city' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
         ];
     }
 }
