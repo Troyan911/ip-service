@@ -32,9 +32,3 @@ composer:
 	docker compose exec php composer install
 
 setup: composer migrate seed
-
-
-f:fixtures
-
-m: migrate
-
