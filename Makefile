@@ -20,67 +20,19 @@ m, migrate:
 mr, rollback:
 	docker compose exec php php artisan migrate:rollback
 
-
-
-
-
-
-
-console:
-	docker compose exec php php bin/console
+seed:
+	docker compose exec php php artisan db:seed
 
 
 test:
-	docker compose exec php php bin/phpunit tests/Unit  #--debug
-	#docker compose exec php php bin/phpunit tests/Api  #--debug
-
-
-db-create:
-	docker compose exec php php bin/console doctrine:database:create --if-not-exists
-
-migration:
-	docker compose exec php php bin/console make:migration --no-interaction
-
-
-schema-update:
-	docker compose exec php php bin/console doctrine:schema:update --force
-
-cache-clear:
-	docker compose exec php php bin/console cache:clear
-
-wreset:
-	docker compose exec php php bin/console app:words:reset
-
-fixtures:
-	docker compose exec php php bin/console app:fixtures:reset
-	docker compose exec php php bin/console doctrine:fixtures:load --no-interaction
-
-
-elastica-create:
-	docker compose exec php php bin/console fos:elastica:create
-
-elastica-reset:
-	docker compose exec php php bin/console fos:elastica:reset
-
-elastica-populate:
-	docker compose exec php php bin/console fos:elastica:populate
-
-setup:
-	docker compose exec php php bin/console doctrine:database:create --if-not-exists
-	docker compose exec php php bin/console doctrine:migrations:migrate --no-interaction
-	docker compose exec php php bin/console cache:clear
-
-jwt:
-	docker compose exec php php bin/console lexik:jwt:generate-keypair
+	docker compose exec php php artisan test tests/Unit  #--debug
+	docker compose exec php php artisan test tests/Feature  #--debug
 
 composer:
 	docker compose exec php composer install
 
-setup: composer migrate fixtures jwt cache
+setup: composer migrate seed
 
-
-route:
-	docker compose exec php php bin/console debug:route
 
 f:fixtures
 
