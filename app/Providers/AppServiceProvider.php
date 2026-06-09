@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Adapters\IpApiGeoProvider;
+use App\Contracts\GeoProviderInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(
+            GeoProviderInterface::class,
+            IpApiGeoProvider::class
+        );
     }
 
     /**
